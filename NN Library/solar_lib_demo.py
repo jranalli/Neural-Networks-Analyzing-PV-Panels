@@ -19,14 +19,14 @@ def main():
     out_root = r'D:\data\solardnn_2025\NY-Q'
     ds_filelist_dir = os.path.join(out_root, 'tiles')
 
-    seed = 1024
-    channel_list = [0,1,2,3]
+    seed = 2025
+    channel_list = [1,2,3]
     cropsize = 576
     epochs = 20
     batch_size = 16
 
     load = False
-    ver = 6
+    ver = 16
 
     # Build the dataset definition files if they don't exist
     im_list = fm.read_file_list(os.path.join(ds_root, 'positive_tiles.txt'))
@@ -61,8 +61,12 @@ def main():
 
     tmax = np.ceil(epochs * len(train_ds) / batch_size)
     # create model
-    # model = solar_model.SolarModel("FPN", "resnext50_32x4d", in_channels=len(channel_list), t_max=tmax)
-    model = solar_model.SolarModel4Chan("FPN", "resnext50_32x4d", in_channels=len(channel_list), t_max=tmax)
+    model = solar_model.SolarModel("FPN", "resnext50_32x4d", in_channels=len(channel_list), t_max=tmax)
+    # model = solar_model.SolarModel4Chan("FPN", "resnext50_32x4d", in_channels=len(channel_list), t_max=tmax)
+
+    # A transformer model
+    # model = solar_model.SolarModel("FPN", "mit_b2", in_channels=len(channel_list), t_max=tmax)
+    # model = solar_model.SolarModel4Chan("FPN", "mit_b2", in_channels=len(channel_list), t_max=tmax)
 
     if load and os.path.exists(rf".\lightning_logs\version_{ver}\checkpoints"):
         import glob
