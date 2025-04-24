@@ -20,10 +20,10 @@ def main():
     ds_filelist_dir = os.path.join(out_root, 'tiles')
 
     seed = 2025
-    channel_list = [1,2,3]
+    channel_list = [0,1,2]
     cropsize = 576
     epochs = 20
-    batch_size = 16
+    batch_size = 8
 
     load = False
     ver = 16
